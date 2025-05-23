@@ -1,0 +1,32 @@
+UltaVPN Link Decoder and Config Generator (TypeScript)
+
+DESCRIPTION
+This tool decodes UltaVPN links (vpn://) and can fetch WireGuard configurations from the API.
+
+INSTALLATION
+npm install
+
+BUILD
+npm run build
+
+USAGE
+# Using npm
+npm start -- <vpn_link> [OPTIONS]
+
+# Using node directly
+node dist/index.js <vpn_link> [OPTIONS]
+
+OPTIONS
+--get-conf, -gc    Fetch WireGuard configuration from API
+--output, -o       Save WireGuard configuration to file
+--help, -h         Show help message
+
+EXAMPLES
+1. Decode VPN link only:
+   npm start -- "vpn://abcd1234..."
+
+2. Decode VPN link and fetch configuration:
+   npm start -- "vpn://abcd1234..." --get-conf
+
+3. Decode VPN link, fetch and save configuration:
+   npm start -- "vpn://abcd1234..." --get-conf --output wireguard.conf

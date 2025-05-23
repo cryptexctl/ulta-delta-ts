@@ -1,0 +1,25 @@
+{
+  "name": "ulta-delta-ts",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "UltaVPN Link Decoder and Config Generator in TypeScript",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "uuid": "^9.0.1",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/uuid": "^9.0.7",
+    "@types/yargs": "^17.0.32",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  }
+}
