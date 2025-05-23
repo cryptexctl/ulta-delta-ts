@@ -21,7 +21,28 @@ const decodeVpnLink = (vpnKeyStr: string): VpnConfig => {
 
   try {
     const buffer = Buffer.from(vpnKeyStr, 'base64');
-    const decompressed = zlib.inflateRawSync(buffer.slice(4));
+    let decompressed: Buffer | undefined;
+        const decompressionMethods = [
+      () => zlib.inflateSync(buffer.slice(4)),
+      () => zlib.inflateRawSync(buffer.slice(4)),
+      () => zlib.gunzipSync(buffer.slice(4)),
+      () => zlib.inflateSync(buffer),
+      () => zlib.inflateRawSync(buffer),
+      () => zlib.gunzipSync(buffer)
+    ];
+    
+    for (const method of decompressionMethods) {
+      try {
+        decompressed = method();
+        break;
+      } catch (err) {
+      }
+    }
+    
+    if (!decompressed) {
+      throw new Error('Could not decompress data with any known method');
+    }
+    
     return JSON.parse(decompressed.toString());
   } catch (e) {
     throw new Error(`Failed to decode VPN link: ${e}`);
